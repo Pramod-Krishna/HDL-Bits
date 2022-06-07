@@ -1,0 +1,11 @@
+module top_module (
+    input in1,
+    input in2,
+    input in3,
+    output out);
+	wire s1;
+    
+    xnor(s1, in1, in2);
+    xor(out, s1, in3);
+    
+endmodule

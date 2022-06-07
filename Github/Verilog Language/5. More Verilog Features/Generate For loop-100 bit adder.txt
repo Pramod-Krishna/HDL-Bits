@@ -1,0 +1,25 @@
+module top_module( 
+    input [99:0] a, b,
+    input cin,
+    output [99:0] cout,
+    output [99:0] sum );
+    
+    //initial 					Writing this gets an error.
+   //     begin
+   fadd(a[0],b[0],cin,sum[0],cout[0]);
+    //    end
+    
+    genvar i;   //If not written: can't declare implicit net "i" because the current value of 'default_nettype is "none"
+    generate
+        for(i=1;i<100;i=i+1)	
+            begin: FA
+            fadd(a[i],b[i],cout[i-1],sum[i],cout[i]);
+        end
+    endgenerate
+
+endmodule
+
+module fadd(input a,b,cin,
+            output sum,cout);
+    assign {cout,sum} = a+b+cin;
+endmodule
